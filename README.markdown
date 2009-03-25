@@ -16,6 +16,8 @@ In other words, there is no way to get at the uploaded file without going throug
 
 This uses spanner's [reader](https://github.com/spanner/radiant-reader-extension) and [reader_group](https://github.com/spanner/radiant-reader_group-extension) extensions for access control. If you would like to change the basis for allowing downloads, the easiest thing is probably to override or chain `Download#available_to?`. But do tell us what you're trying to do. We like to be useful.
 
+Also requires paperclip. At the moment I'm assuming that you have the paperclipped extension installed. If you don't want to do that, you can always put paperclip in your root /vendor/plugins.
+
 This should be straightforwardly `multi_site` compatible. If you use our [fork of multi_site](https://github.com/spanner/radiant-multi-site-extension/) then downloads (and readers and groups) will be site-scoped.
 
 ## In nginx

@@ -1,0 +1,38 @@
+- if @download.new_record?
+  %h1 New Download
+- else
+  %h1 Edit Download
+
+- form_tag({}, {:multipart => true}) do
+  .form-area
+    %p{:class => 'title'}
+      %label{:for => 'download_title'} Download title:
+      = text_field "download", "title", :class => 'textbox', :maxlength => 255
+    %p{:class => 'content'}
+      %label{:for => 'download_file'} Upload file:
+      %br
+      = file_column_field "download", "file"
+      %br
+      %small
+        - if @download.file_ok?
+          Current file: 
+          = link_to @download.filename, download_url(:id => @download)
+        - elsif @download.new_record?
+          Please upload your download
+        - else
+          %strong File not found: please upload again
+    %p
+      %label{:for => 'download_groups'} Available to:
+      %br
+      - Group.find(:all).each do |group|
+        %span.checkbox
+          = check_box_tag "download[group_ids][]", group.id, @download.has_group?(group)
+          = group.title
+    %p Downloads are secure by default: if no group is ticked, only site administrators will be able to download this file.
+    = updated_stamp @download
+    = javascript_tag "$('download_title').activate()"
+    %p.buttons
+      = save_model_button(@download)
+      = save_model_and_continue_editing_button(@download)
+      or
+      = link_to 'Cancel', download_index_url

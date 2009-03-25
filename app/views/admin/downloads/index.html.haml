@@ -1,0 +1,30 @@
+%h1 Authorised Downloads
+
+%table#downloads.index{:cellpadding => "0", :cellspacing => "0", :border => "0"}
+  %thead
+    %tr
+      %th.download Title
+      %th.file File
+      %th.groups Visible to groups
+      %th.actions
+  %tbody
+    - if @downloads.empty?
+      %tr
+        %td.note{:colspan => "4"} 
+          No downloads for you, sonny
+    - else
+      - @downloads.each do |dl|
+        %tr{:class => "node level-1"}
+          %td.title
+            = link_to dl.name, edit_admin_download_url(dl)
+          %td.file
+            = link_to dl.document_file_name, dl.document.url
+            = number_to_human_size(dl.document_file_size)
+          %td.groups
+            = dl.groups.map {|g| link_to g.name, admin_group_url(g) }.join(', ')
+          %td.remove
+            =  link_to( image('remove', :alt => 'Remove Download'), :action => 'destroy', :id => dl, :confirm => "are you sure you want to completely remove #{dl.name}?")
+
+
+%p
+  = link_to(image('new-file', :alt => 'New download'), :action => 'new')

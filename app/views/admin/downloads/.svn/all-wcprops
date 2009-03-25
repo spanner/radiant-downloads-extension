@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/tlms/!svn/ver/103/trunk/vendor/extensions/radiant_download/app/views/admin/download
+END
+remove.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/tlms/!svn/ver/103/trunk/vendor/extensions/radiant_download/app/views/admin/download/remove.rhtml
+END
+edit.html.haml
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/tlms/!svn/ver/133/trunk/vendor/extensions/radiant_download/app/views/admin/download/edit.html.haml
+END
+download.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/tlms/!svn/ver/103/trunk/vendor/extensions/radiant_download/app/views/admin/download/download.rhtml
+END
+index.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/tlms/!svn/ver/103/trunk/vendor/extensions/radiant_download/app/views/admin/download/index.rhtml
+END

@@ -1,0 +1,21 @@
+class Admin::DownloadController < Admin::AbstractModelController
+
+  model_class Download
+
+  only_allow_access_to :index, :new, :edit, :remove, :members, :when => :author,
+    :denied_url => {:controller => 'page', :action => :index},
+    :denied_message => 'You must have admin privileges to edit downloads.'
+
+  def destroy
+    @download = Download.find(params[:id])
+    if !@download.nil?
+      notice = "#{@download.title } deleted"
+      @download.destroy
+      flash[:notice] = notice
+    end
+    redirect_to :action => 'index'
+  end
+
+end
+
+

@@ -1,0 +1,65 @@
+<% content_for :page_css do %>
+	table#downloads td.title {
+		font-family: 'Lucida Grande';
+		font-size: 15px;
+		font-weight: bold;
+		height: 18px;
+	}
+	table#downloads td.title a {
+		color: black;
+		text-decoration: none;
+	}
+<% end %>
+
+<h1>Controlled Downloads</h1>
+
+<table id="downloads" class="index" cellpadding="0" cellspacing="0" border="0">
+  <thead>
+    <tr>
+      <th class="download">Title</th>
+      <th class="file">File</th>
+      <th class="groups">Visible to groups</th>
+      <th class="actions"></th>
+    </tr>
+  </thead>
+  <tbody>
+<% unless @downloads.empty? -%>
+	<% for dl in @downloads -%>
+    <tr class="node level-1">
+      <td class="title">
+        <%= link_to dl.title, :action => 'edit', :id => dl %>
+      </td>
+      <td>
+				<% if dl.file.nil? %>
+					<span class="warning">no file uploaded</span>
+				<% elsif !dl.file_ok? %>
+					<span class="warning">file missing</span>
+				<% else %>	
+				 	<%= link_to dl.filename, "#{download_url(:id => dl)}" %> (<%= number_to_human_size(dl.file_size) %>)
+				<% end %>
+      </td>
+      <td>
+			  <%= dl.groups.map {|g| g.title }.join(', ') %>
+      </td>
+      <td class="remove">
+				<%=  link_to( image('remove', :alt => 'Remove Download'), :action => 'destroy', :id => dl, :confirm => "are you sure you want to completely remove #{dl.title}?") %>
+			</td>
+    </tr>
+	<% end -%>
+<% else -%>
+	<tr>
+	  <td colspan="3" class="note">No downloads for you, sonny</td>
+	</tr>
+<% end -%>
+  </tbody>
+</table>
+<script type="text/javascript">
+// <![CDATA[
+  new RuledTable('downloads');
+// ]]>
+</script>
+
+
+<p><%=
+	link_to(image('new-file', :alt => 'New download'), :action => 'new')
+%></p>

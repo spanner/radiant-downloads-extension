@@ -1,0 +1,6 @@
+- include_stylesheet('admin/downloads')
+- render_region :main do |main|
+  - main.edit_header do
+    %h1 New Download
+  - main.edit_form do
+    = render :partial => "form"

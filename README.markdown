@@ -1,8 +1,8 @@
 # Downloads
 
-This is a simple and fairly invisible plugin that makes it easy to protect file downloads using nginx's internal redirects. It works something like this:
+This is a simple and fairly thin extension that makes it easy to protect file downloads using nginx's internal redirects. It works something like this:
 
-* You upload a file using the admin interface and associate it with a couple of reader groups. The file is stored outside the /public folder and can't be reached with a web browser
+* You upload a file using the admin interface and grant access to a couple of reader groups. The file is stored outside the /public folder and can't be reached with a web browser
 * A thin public-facing controller takes download requests and checks them against group membership
 * If you're not allowed, it redirects you to reader login or just tells you off
 * If you are allowed, it returns an attachment-download at a fictional address in /secure_download with the `X-Accel-Redirect` header set to the real address of your file

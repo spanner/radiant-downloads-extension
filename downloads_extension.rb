@@ -20,7 +20,7 @@ class DownloadsExtension < Radiant::Extension
     Radiant::AdminUI.send :include, DownloadUI unless defined? admin.download
     admin.download = Radiant::AdminUI.load_default_download_regions
 
-    admin.tabs.add "Downloads", "/admin/downloads", :after => "Groups", :visibility => [:admin]
+    admin.tabs.add "Downloads", "/admin/downloads", :after => "Layouts", :visibility => [:admin]
   end
   
   def deactivate

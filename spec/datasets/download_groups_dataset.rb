@@ -1,6 +1,8 @@
 require 'digest/sha1'
 class DownloadGroupsDataset < Dataset::Base
-  uses :downloads, :download_readers, (:download_sites if defined? Site)
+  datasets = [:downloads, :download_readers]
+  datasets << :download_sites if defined? Site
+  uses *datasets
 
   def load
     create_group "Normal"

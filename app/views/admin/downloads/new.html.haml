@@ -3,4 +3,5 @@
   - main.edit_header do
     %h1 New Download
   - main.edit_form do
-    = render :partial => "form"
+    - form_for :download, :url => admin_downloads_path, :html => { :multipart => true } do |f|
+      = render :partial => "form", :locals => { :f => f }

@@ -1,47 +1,46 @@
-- form_for [:admin, @download], :html => {:multipart => true} do |f|
-  .form-area
-    = render_region :form_top
-    = hidden_field 'download', 'lock_version'
+.form-area
+  = render_region :form_top
+  = hidden_field 'download', 'lock_version'
 
-    - render_region :form do |form|
-      - form.edit_title do
-        %p.title
-          = f.label :name
-          = f.text_field 'name', :maxlength => 100, :class => "textbox"
+  - render_region :form do |form|
+    - form.edit_title do
+      %p.title
+        = f.label :name
+        = f.text_field 'name', :maxlength => 100, :class => "textbox"
 
-      - form.edit_description do
-        %p.description
-          = f.label :description, "Description or introduction"
-          = f.text_area 'description', :size => '40x6', :style => 'width: 100%; height: 160px;', :class => "textarea"
+    - form.edit_description do
+      %p.description
+        = f.label :description, "Description or introduction"
+        = f.text_area 'description', :size => '40x6', :style => 'width: 100%; height: 160px;', :class => "textarea"
 
-      - form.edit_document do
-        %p.document
-          = f.label :document, "Upload document"
-          = f.file_field :document
-          - if @download.document?
-            %small
-              Current file: 
-              = link_to @download.document, download_url(@download)
+    - form.edit_document do
+      %p.document
+        = f.label :document, "Upload document"
+        = f.file_field :document
+        - if @download.document?
+          %small
+            Current file: 
+            = link_to @download.document_file_name, download_url(@download)
 
-        - form.edit_access do
-          %p.access
-            = f.label :groups, "Available to"
-            - Group.find(:all).each do |group|
-              %span.checkbox
-                = check_box_tag "download[group_ids][]", group.id, @download.has_group?(group)
-                = group.name
+      - form.edit_access do
+        %p.access
+          = f.label :groups, "Available to"
+          - Group.find(:all).each do |group|
+            %span.checkbox
+              = check_box_tag "download[group_ids][]", group.id, @download.has_group?(group)
+              = group.name
 
-          %p Downloads are secure by default: if no group is ticked, only site administrators will be able to download this file.
+        %p If no group is ticked, any logged-in reader can be offered this file.
 
-    = javascript_tag "$('download_name').activate()"
+  = javascript_tag "$('download_name').activate()"
 
-    - render_region :form_bottom do |form_bottom|
-      - form_bottom.edit_timestamp do
-        = updated_stamp @download  
-      - form_bottom.edit_buttons do
-        %p.buttons
-          = save_model_button @download
-          = save_model_and_continue_editing_button @download
-          or
-          = link_to "Cancel", admin_downloads_url
+  - render_region :form_bottom do |form_bottom|
+    - form_bottom.edit_timestamp do
+      = updated_stamp @download  
+    - form_bottom.edit_buttons do
+      %p.buttons
+        = save_model_button @download
+        = save_model_and_continue_editing_button @download
+        or
+        = link_to "Cancel", admin_downloads_url
 

@@ -12,9 +12,13 @@ This is a simple and fairly thin extension that makes it easy to protect file do
 
 In other words, there is no way to get at the uploaded file without going through the authenticating controller. The original inspiration is [in Alexei Kovyrin's blog](http://blog.kovyrin.net/2006/11/01/nginx-x-accel-redirect-php-rails/).
 
+It ought to be an easy matter to make this work with Apache and sendfile, but I haven't needed to.
+
+As with other group-access-control, a download with no groups attached is considered available, but here we are more restrictive and only make it available to logged in readers. If you want to publish a document for the public, you'd be better advised to upload it as a paperclipped asset.
+
 ## Status
 
-Beta. This is quite well-established code but I've just spent the morning bringing it up to date, swapping paperclip for file_column and writing a reasonable set of tests. They all pass, and it ought to be useable, but I expect there's something I've missed.
+Should be reliable. It's quite well-established code. The original version used file_column so I've spent some time bringing it across to paperclip and writing proper tests.
 
 ## Requirements
 
@@ -22,9 +26,13 @@ This uses spanner's [reader](https://github.com/spanner/radiant-reader-extension
 
 Also requires [paperclip](http://www.thoughtbot.com/projects/paperclip). At the moment, rather than doubling up I'm assuming that you already have the paperclipped extension installed. If you don't want to do that, you can always put paperclip in your root /vendor/plugins.
 
+(We thought about just applying access control to paperclipped assets but the machinery there is too specialised for images: most of what goes in here will be pdfs and office documents. The separate store is tricky too.)
+
 This should be straightforwardly `multi_site` compatible. If you use our [fork of multi_site](https://github.com/spanner/radiant-multi-site-extension/) then downloads (and readers and groups) will be site-scoped.
 
-## In nginx
+## Configuration
+
+### In nginx
 
 This is what I use:
 
@@ -41,7 +49,7 @@ but I'm no nginx rypy. Suggestions would be very welcome.
 
 (And naturally a security-minded person would only put this in the SSL-enabled version of the site, with the appropriate measures to direct people there).
 
-## In capistrano
+### In capistrano
 
 Ideally we will be storing downloads in the shared directory rather than in /current, so that they persist through deployments. I can't see a good way to get at that directory without making unhelpful assumptions in the model, so instead I will assume that if you use capistrano, you're doing the right thing with symlinks on deployment:
 
@@ -54,12 +62,20 @@ Ideally we will be storing downloads in the shared directory rather than in /cur
 		run "ln -s #{shared_path}/secure_downloads #{current_release}/secure_downloads" 
 	end
 	
+Note that secure_downloads is not inside the public site.
+
+## Usage
+
+You'll see a 'downloads' tab in admin. Add files to the list there and you can link to them like this:
+
+
+
 ## Bugs and comments
 
 In [lighthouse](http://spanner.lighthouseapp.com/projects/26912-radiant-extensions), please, or for little things an email or github message is fine.
 
 ## Author and copyright
 
-Copyright spanner ltd 2007-9.
-Released under the same terms as Rails and/or Radiant.
-Contact will at spanner.org
+* Copyright spanner ltd 2007-9.
+* Released under the same terms as Rails and/or Radiant.
+* Contact will at spanner.org

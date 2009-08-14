@@ -8,7 +8,7 @@ class DownloadsExtension < Radiant::Extension
   
   define_routes do |map|
     map.resources :downloads, :only => :show
-    map.namespace :admin do |admin|
+    map.namespace :admin, :path_prefix => 'admin/readers' do |admin|
       admin.resources :downloads
     end
   end
@@ -21,7 +21,7 @@ class DownloadsExtension < Radiant::Extension
     Radiant::AdminUI.send :include, DownloadUI unless defined? admin.download
     admin.download = Radiant::AdminUI.load_default_download_regions
 
-    admin.tabs.add "Downloads", "/admin/downloads", :after => "Layouts", :visibility => [:admin]
+    admin.tabs['Readers'].add_link('secure downloads', '/admin/readers/downloads')
   end
   
   def deactivate

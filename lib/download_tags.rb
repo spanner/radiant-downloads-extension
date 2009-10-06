@@ -3,6 +3,26 @@ module DownloadTags
 
   class TagError < StandardError; end
   
+  # the root group tag is defined in reader_group and should only expand if there is a page group or message group
+
+  desc %{
+    Expands if this group has any downloads.
+    
+    <pre><code><r:group:if_downloads>...</r:group:if_downloads /></code></pre>
+  }
+  tag "group:if_downloads" do |tag|
+    tag.expand if tag.locals.group.downloads.any?
+  end
+
+  desc %{
+    Expands if this group does not have any downloads.
+    
+    <pre><code><r:group:unless_downloads>...</r:group:unless_downloads /></code></pre>
+  }
+  tag "group:unless_downloads" do |tag|
+    tag.expand unless tag.locals.group.downloads.any?
+  end
+  
   desc %{
     Cycles through all downloads for the current group.
     (which will only be defined if this is the home page for a group)
@@ -20,6 +40,24 @@ module DownloadTags
       result << tag.expand
     end 
     result
+  end
+
+  desc %{
+    Expands if the current reader has any downloads.
+    
+    <pre><code><r:reader:if_downloads>...</r:reader:if_downloads /></code></pre>
+  }
+  tag "reader:if_downloads" do |tag|
+    tag.expand if tag.locals.reader.downloads.any?
+  end
+
+  desc %{
+    Expands if the current reader does not have any downloads.
+    
+    <pre><code><r:reader:unless_downloads>...</r:reader:unless_downloads /></code></pre>
+  }
+  tag "reader:unless_downloads" do |tag|
+    tag.expand unless tag.locals.reader.downloads.any?
   end
 
   desc %{
@@ -113,6 +151,7 @@ module DownloadTags
     text = tag.double? ? tag.expand : tag.render('download:title')
     %{<a href="#{tag.render('download:url')}"#{attributes}>#{text}</a>}
   end
+  
 
 private
 

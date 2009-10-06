@@ -1,0 +1,10 @@
+/* submenu admin */
+
+#content table.index .node .download {
+  font-size:115%;
+  font-weight:bold;
+}
+
+#content table.index .node .download a {
+  color: black;
+}

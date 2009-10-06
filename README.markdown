@@ -24,7 +24,7 @@ Should be reliable. It's quite well-established code. The original version used 
 
 This uses spanner's [reader](https://github.com/spanner/radiant-reader-extension) and [reader_group](https://github.com/spanner/radiant-reader_group-extension) extensions for access control. If you would like to change the basis for allowing downloads, the easiest thing is probably to override or chain `Download#available_to?`. But do tell us what you're trying to do. We like to be useful.
 
-Also requires [paperclip](http://www.thoughtbot.com/projects/paperclip). At the moment, rather than doubling up I'm assuming that you already have the paperclipped extension installed. If you don't want to do that, you can always put paperclip in your root /vendor/plugins.
+Also requires [paperclip](http://www.thoughtbot.com/projects/paperclip) gem, or the paperclipped extension (which currently vendors paperclip).
 
 (We thought about just applying access control to paperclipped assets but the machinery there is too specialised for images: most of what goes in here will be pdfs and office documents. The separate store is tricky too.)
 

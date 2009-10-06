@@ -4,6 +4,7 @@ class Download < ActiveRecord::Base
   belongs_to :created_by, :class_name => 'User'
   belongs_to :updated_by, :class_name => 'User'
   has_and_belongs_to_many :groups
+  default_scope :order => 'updated_at DESC, created_at DESC'
 
   has_attached_file :document,
                     :url => "/secure_download/:id/:basename:no_original_style.:extension",

@@ -1,3 +1,5 @@
+- include_stylesheet 'admin/downloads'
+
 %h1 Authorised Downloads
 
 %table#downloads.index{:cellpadding => "0", :cellspacing => "0", :border => "0"}
@@ -15,7 +17,7 @@
     - else
       - @downloads.each do |dl|
         %tr{:class => "node level-1"}
-          %td.title
+          %td.download
             = link_to dl.name, edit_admin_download_url(dl)
           %td.file
             = link_to dl.document_file_name, download_url(dl)

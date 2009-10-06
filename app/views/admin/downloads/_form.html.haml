@@ -15,7 +15,7 @@
 
     - form.edit_document do
       %p.document
-        = f.label :document, "Upload document"
+        = f.label :document, @download.document? ? "Replace document" : "Upload document"
         = f.file_field :document
         - if @download.document?
           %small
@@ -29,8 +29,9 @@
             %span.checkbox
               = check_box_tag "download[group_ids][]", group.id, @download.has_group?(group)
               = group.name
-
-        %p If no group is ticked, any logged-in reader can be offered this file.
+          %br
+          %span.formnote
+            If no group is ticked, any logged-in reader can download this file.
 
   = javascript_tag "$('download_name').activate()"
 

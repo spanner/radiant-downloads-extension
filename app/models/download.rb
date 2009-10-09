@@ -7,7 +7,7 @@ class Download < ActiveRecord::Base
   default_scope :order => 'updated_at DESC, created_at DESC'
 
   has_attached_file :document,
-                    :url => "/secure_download/:id/:basename:no_original_style.:extension",
+                    :url => "/secure_downloads/:id/:basename:no_original_style.:extension",
                     :path => ":rails_root/secure_downloads/:id/:basename:no_original_style.:extension"
 
   validates_attachment_presence :document

@@ -132,7 +132,7 @@ module DownloadTags
   }    
   tag 'download:url' do |tag|
     if download = _get_download(tag)
-      download.document.url
+      download_path(download)
     end
   end
 

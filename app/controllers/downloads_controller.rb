@@ -12,7 +12,7 @@ class DownloadsController < ReaderActionController
       render :nothing => true
     else
       flash[:error] = "Sorry: you don't have permission to download that file."
-      render :template => 'site/not_allowed'
+      render :template => 'reader/permission_denied'
     end
   end
   

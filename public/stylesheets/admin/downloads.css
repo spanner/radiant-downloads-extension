@@ -8,3 +8,18 @@
 #content table.index .node .download a {
   color: black;
 }
+
+#content .form-area .user select {
+  font-family:Georgia,Palatino,"Times New Roman",Times,serif;
+  font-size:150%;
+  width:60%;
+}
+
+#content .form-area p.description {
+  margin-top: 10px;
+}
+
+#content .form-area span.formnote {
+  color: #7d796c;
+  font-size: 85%;
+}

@@ -7,6 +7,7 @@ module DownloadUI
       alias_method :downloads, :download
 
       def load_default_regions_with_download
+        load_default_regions_without_download
         @download = load_default_download_regions
       end
 

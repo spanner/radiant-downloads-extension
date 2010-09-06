@@ -24,13 +24,14 @@ class DownloadsExtension < Radiant::Extension
     Page.send :include, DownloadTags
     UserActionObserver.instance.send :add_observer!, Download 
 
-    unless defined? admin.download
-      Radiant::AdminUI.send :include, DownloadUI
-      admin.download = Radiant::AdminUI.load_default_download_regions
+    if respond_to?(:tab)
+      tab("Content") do
+        add_item("Downloads", "/admin/readers/downloads")
+      end
+    else
+      admin.tabs.add "Downloads", "/admin/readers/downloads", :visibility => [:all]
     end
-
-    admin.tabs['Readers'].add_link('downloads', '/admin/readers/downloads')
-  end
+  end  
   
   def deactivate
   end

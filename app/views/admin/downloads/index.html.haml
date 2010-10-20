@@ -1,5 +1,3 @@
-- include_stylesheet 'admin/downloads'
-
 #downloads_table.outset      
   %table#downloads.index{:cellpadding => "0", :cellspacing => "0", :border => "0"}
     %thead
@@ -15,8 +13,8 @@
             No downloads for you, sonny
       - else
         - @downloads.each do |dl|
-          %tr{:class => "node level-1"}
-            %td.download
+          %tr
+            %td.name
               = link_to dl.name, edit_admin_download_url(dl)
             %td.file
               = link_to dl.document_file_name, download_url(dl)
@@ -24,7 +22,7 @@
             %td.groups
               = dl.groups.map {|g| link_to g.name, admin_group_url(g) }.join(', ')
             %td.actions
-              =  link_to( image('minus') + ' remove Download', admin_reader_url(reader), :method => :delete, :class => 'action', :confirm => "are you sure you want to completely remove #{dl.name}?")
+              =  link_to( image('minus') + ' delete', admin_download_url(dl), :method => :delete, :class => 'action', :confirm => "are you sure you want to completely remove #{dl.name}?")
 
 #actions
   = pagination_for @downloads

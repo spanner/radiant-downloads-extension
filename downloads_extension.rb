@@ -19,7 +19,7 @@ class DownloadsExtension < Radiant::Extension
 
     if respond_to?(:tab)
       tab("Readers") do
-        add_item("Downloads", "/admin/readers/downloads")
+        add_item("Downloads", "/admin/readers/downloads", :before => 'Settings')
       end
     else
       admin.tabs.add "Downloads", "/admin/readers/downloads", :visibility => [:all]

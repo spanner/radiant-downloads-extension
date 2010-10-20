@@ -1,7 +1,5 @@
 - include_stylesheet 'admin/downloads'
 
-%h1 Authorised Downloads
-
 #downloads_table.outset      
   %table#downloads.index{:cellpadding => "0", :cellspacing => "0", :border => "0"}
     %thead
@@ -25,9 +23,8 @@
               = number_to_human_size(dl.document_file_size)
             %td.groups
               = dl.groups.map {|g| link_to g.name, admin_group_url(g) }.join(', ')
-            %td.remove
-              =  link_to( image('remove', :alt => 'Remove Download'), :action => 'destroy', :id => dl, :confirm => "are you sure you want to completely remove #{dl.name}?")
-
+            %td.actions
+              =  link_to( image('minus') + ' remove Download', admin_reader_url(reader), :method => :delete, :class => 'action', :confirm => "are you sure you want to completely remove #{dl.name}?")
 
 #actions
   = pagination_for @downloads

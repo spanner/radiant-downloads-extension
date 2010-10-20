@@ -8,10 +8,13 @@ module DownloadUI
 
       def load_default_regions_with_download
         load_default_regions_without_download
+        load_download_extension_regions
+      end
+      alias_method_chain :load_default_regions, :download
+      
+      def load_download_extension_regions
         @download = load_default_download_regions
       end
-
-      alias_method_chain :load_default_regions, :download
 
       protected
 

@@ -3,7 +3,7 @@
 require 'paperclip'
 
 class DownloadsExtension < Radiant::Extension
-  version "0.5.1"
+  version "0.5.2"
   description "Controlled file access using nginx's local redirects. Requires reader and reader_group extensions."
   url "http://www.spanner.org/radiant/downloads"
     
@@ -12,8 +12,13 @@ class DownloadsExtension < Radiant::Extension
     Page.send :include, DownloadTags
     UserActionObserver.instance.send :add_observer!, Download 
 
+    unless defined? admin.downloads
+      Radiant::AdminUI.send :include, DownloadUI
+      Radiant::AdminUI.load_download_extension_regions
+    end
+
     if respond_to?(:tab)
-      tab("Content") do
+      tab("Readers") do
         add_item("Downloads", "/admin/readers/downloads")
       end
     else

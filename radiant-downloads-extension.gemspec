@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{radiant-downloads-extension}
-  s.version = "0.5.0"
+  s.version = "0.5.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["spanner"]
-  s.date = %q{2010-09-15}
+  s.date = %q{2010-10-20}
   s.description = %q{Controlled, secure file access with group-based access control.}
   s.email = %q{will@spanner.org}
   s.extra_rdoc_files = [
@@ -19,6 +19,7 @@ Gem::Specification.new do |s|
     ".gitignore",
      "README.markdown",
      "Rakefile",
+     "VERSION",
      "app/controllers/admin/downloads_controller.rb",
      "app/controllers/downloads_controller.rb",
      "app/models/download.rb",
@@ -26,6 +27,7 @@ Gem::Specification.new do |s|
      "app/views/admin/downloads/edit.html.haml",
      "app/views/admin/downloads/index.html.haml",
      "app/views/admin/downloads/new.html.haml",
+     "config/routes.rb",
      "db/migrate/001_create_downloads.rb",
      "downloads_extension.rb",
      "lib/download_group.rb",
@@ -33,6 +35,7 @@ Gem::Specification.new do |s|
      "lib/download_ui.rb",
      "lib/tasks/downloads_extension_tasks.rake",
      "public/stylesheets/admin/downloads.css",
+     "radiant-downloads-extension.gemspec",
      "spec/controllers/downloads_controller_spec.rb",
      "spec/datasets/download_groups_dataset.rb",
      "spec/datasets/download_readers_dataset.rb",
@@ -68,13 +71,16 @@ Gem::Specification.new do |s|
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<radiant>, [">= 0.9.0"])
       s.add_runtime_dependency(%q<radiant-reader_group-extension>, [">= 0"])
+      s.add_runtime_dependency(%q<paperclip>, [">= 0"])
     else
       s.add_dependency(%q<radiant>, [">= 0.9.0"])
       s.add_dependency(%q<radiant-reader_group-extension>, [">= 0"])
+      s.add_dependency(%q<paperclip>, [">= 0"])
     end
   else
     s.add_dependency(%q<radiant>, [">= 0.9.0"])
     s.add_dependency(%q<radiant-reader_group-extension>, [">= 0"])
+    s.add_dependency(%q<paperclip>, [">= 0"])
   end
 end
 

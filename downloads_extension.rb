@@ -3,7 +3,7 @@
 require 'paperclip'
 
 class DownloadsExtension < Radiant::Extension
-  version "0.5"
+  version "0.5.1"
   description "Controlled file access using nginx's local redirects. Requires reader and reader_group extensions."
   url "http://www.spanner.org/radiant/downloads"
     

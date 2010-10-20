@@ -28,15 +28,13 @@ Also requires [paperclip](http://www.thoughtbot.com/projects/paperclip) gem, or 
 
 (We thought about just applying access control to paperclipped assets but the machinery there is too specialised for images: most of what goes in here will be pdfs and office documents. The separate store is tricky too.)
 
-This should be straightforwardly `multi_site` compatible. If you use our [fork of multi_site](https://github.com/spanner/radiant-multi-site-extension/) then downloads (and readers and groups) will be site-scoped.
-
 ## Configuration
 
 ### In nginx
 
 This is what I use:
 
-	location /secure_download/ {
+	location /secure_downloads/ {
 		internal;
 		root /your/site/directory/current/secure_downloads;	
 		default_type  application/pdf;

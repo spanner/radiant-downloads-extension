@@ -3,9 +3,9 @@
 require 'paperclip'
 
 class DownloadsExtension < Radiant::Extension
-  version "0.5.2"
-  description "Controlled file access using nginx's local redirects. Requires reader and reader_group extensions."
-  url "http://www.spanner.org/radiant/downloads"
+  version RadiantDownloadsExtension::VERSION
+  description RadiantDownloadsExtension::DESCRIPTION
+  url RadiantDownloadsExtension::URL
     
   def activate
     Group.send :include, DownloadGroup
@@ -17,16 +17,9 @@ class DownloadsExtension < Radiant::Extension
       Radiant::AdminUI.load_download_extension_regions
     end
 
-    if respond_to?(:tab)
-      tab("Readers") do
-        add_item("Downloads", "/admin/readers/downloads", :before => 'Settings')
-      end
-    else
-      admin.tabs.add "Downloads", "/admin/readers/downloads", :visibility => [:all]
+    tab("Readers") do
+      add_item("Downloads", "/admin/readers/downloads", :before => 'Settings')
     end
   end  
-  
-  def deactivate
-  end
   
 end

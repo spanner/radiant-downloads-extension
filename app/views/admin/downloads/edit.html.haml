@@ -5,3 +5,5 @@
   - main.edit_form do
     - form_for :download, :url => admin_download_path(@download), :html => { :method => "put", :multipart => true } do |f|
       = render :partial => 'form', :locals => { :f => f }
+  - main.edit_popups do
+    = render :partial => 'admin/groups/popup', :locals => {:groupee => @download}

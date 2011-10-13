@@ -21,7 +21,7 @@ module DownloadUI
         def load_default_download_regions
           OpenStruct.new.tap do |download|
             download.edit = Radiant::AdminUI::RegionSet.new do |edit|
-              edit.main.concat %w{edit_header edit_form}
+              edit.main.concat %w{edit_header edit_form edit_popups}
               edit.form.concat %w{edit_title edit_description edit_document edit_access}
               edit.form_bottom.concat %w{edit_timestamp edit_buttons}
             end

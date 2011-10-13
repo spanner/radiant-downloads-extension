@@ -23,15 +23,7 @@
             = link_to @download.document_file_name, download_url(@download)
 
       - form.edit_access do
-        %p.access
-          = f.label :groups, "Available to"
-          - Group.find(:all).each do |group|
-            %span.checkbox
-              = check_box_tag "download[group_ids][]", group.id, @download.has_group?(group)
-              = group.name
-          %br
-          %span.formnote
-            If no group is ticked, any logged-in reader can download this file.
+        = render :partial => "admin/groups/edit_access", :locals => {:groupee => @download}
 
   = javascript_tag "$('download_name').activate()"
 

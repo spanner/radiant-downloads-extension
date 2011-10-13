@@ -1,0 +1,14 @@
+en:
+  activerecord:
+    attributes:
+      download:
+    errors:
+      models:
+        download:
+          attributes:
+  config:
+    download:
+  download: "download"
+  downloads: "Downloads"
+  downloads_extension:
+    permission_denied: "You do not have permission to download the requested file."

@@ -4,16 +4,12 @@ class DownloadsController < ReaderActionController
   
   def show
     @download = Download.find(params[:id])
-    if @download.available_to?(current_reader)
-      response.headers['X-Accel-Redirect'] = @download.document.url
-      response.headers["Content-Type"] = @download.document_content_type
-      response.headers['Content-Disposition'] = "attachment; filename=#{@download.document_file_name}" 
-      response.headers['Content-Length'] = @download.document_file_size
-      render :nothing => true
-    else
-      flash[:error] = "Sorry: you don't have permission to download that file."
-      render :template => 'reader/permission_denied'
-    end
+    raise ReaderError::AccessDenied, t("downloads_extension.permission_denied") unless @download.visible_to?(current_reader)
+    response.headers['X-Accel-Redirect'] = @download.document.url
+    response.headers["Content-Type"] = @download.document_content_type
+    response.headers['Content-Disposition'] = "attachment; filename=#{@download.document_file_name}" 
+    response.headers['Content-Length'] = @download.document_file_size
+    render :nothing => true
   end
   
 end

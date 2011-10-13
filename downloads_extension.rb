@@ -8,7 +8,6 @@ class DownloadsExtension < Radiant::Extension
   url RadiantDownloadsExtension::URL
     
   def activate
-    Group.send :include, DownloadGroup
     Page.send :include, DownloadTags
     UserActionObserver.instance.send :add_observer!, Download 
 
